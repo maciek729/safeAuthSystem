@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-hover: #3a56d4;
+            --secondary-color: #2ec4b6;
+            --secondary-hover: #25a99d;
+            --text-color: #333;
+            --text-light: #6c757d;
+            --border-color: #e0e0e0;
+            --bg-color: #f8f9fa;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --input-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 450px;
+            transition: var(--transition);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+
+        .logo h2 {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        input {
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: var(--transition);
+            box-shadow: var(--input-shadow);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+
+        .btn {
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+        }
+
+        .register-link {
+            text-align: center;
+            margin: 24px 0;
+            font-size: 15px;
+            color: var(--text-light);
+        }
+
+        .register-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 32px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+
+        .divider-text {
+            padding: 0 16px;
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .face-login-section {
+            text-align: center;
+        }
+
+        .face-login-section h2 {
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .status-message {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-light);
+            min-height: 20px;
+        }
+
+        .error-list {
+            background-color: #ffebee;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            color: #d32f2f;
+            font-size: 14px;
+        }
+
+        .error-list ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .error-list li {
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>Logowanie do systemu</h1>
+            <h2>Safe Auth System</h2>
+        </div>
+
+        <form class="login-form" method="POST" action="/login">
+            <div class="form-group">
+                <label for="username">Nazwa użytkownika</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Hasło</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>
+
+            <button class="btn btn-primary" type="submit">Zaloguj się</button>
+        </form>
+
+        <p class="register-link">Nie masz konta? <a href="/register">Zarejestruj się</a></p>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="error-list">
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="divider">
+            <span class="divider-text">lub</span>
+        </div>
+
+        <div class="face-login-section">
+            <h2>Logowanie biometryczne</h2>
+            <button id="faceLoginBtn" class="btn btn-secondary">Zaloguj przez twarz</button>
+            <p id="statusMessage" class="status-message"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('faceLoginBtn').addEventListener('click', async () => {
+            const status = document.getElementById('statusMessage');
+            status.textContent = "Uruchamianie kamery i rozpoznawanie...";
+
+            try {
+                const response = await fetch('/face-login', { method: 'POST' });
+                const result = await response.json();
+
+                if (result.success) {
+                    window.location.href = '/';
+                } else {
+                    status.textContent = result.message || "Logowanie nie powiodło się.";
+                }
+            } catch (error) {
+                status.textContent = "Błąd serwera.";
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+
+</html>

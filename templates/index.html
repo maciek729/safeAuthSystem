@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona główna | Safe Auth System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #eef2ff;
+            --primary-dark: #3a56d4;
+            --secondary: #2ec4b6;
+            --text: #333;
+            --text-light: #6c757d;
+            --bg: #f8f9fa;
+            --bg-card: #ffffff;
+            --border: #e0e0e0;
+            --success: #28a745;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+        }
+
+        .navbar-user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-welcome {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .username {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text);
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .welcome-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+
+        .welcome-card h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .welcome-card p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #ebfbf5;
+            color: var(--success);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            padding: 24px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .footer {
+            background-color: var(--bg-card);
+            padding: 24px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+            margin-top: 80px;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 768px) {
+            .welcome-card {
+                padding: 30px 20px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">
+            <span class="logo-icon">🔐</span>
+            Safe Auth System
+        </a>
+        <div class="navbar-user">
+            <span class="user-welcome">Witaj, <span class="username">{{ username }}</span>!</span>
+            <div class="avatar">{{ username[0] | upper }}</div>
+            <a href="/logout" class="btn btn-outline">Wyloguj</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="welcome-card">
+            <div class="status-badge">
+                <span>✓</span> Zalogowano pomyślnie
+            </div>
+            <h1>Witaj w panelu użytkownika!</h1>
+            <p>Dziękujemy za korzystanie z naszego systemu bezpiecznego logowania i uwierzytelniania.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Bezpieczne logowanie</h3>
+                <p>Twoje konto jest chronione przez najnowsze technologie bezpieczeństwa, w tym uwierzytelnianie biometryczne.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👤</div>
+                <h3>Profil użytkownika</h3>
+                <p>Możesz zarządzać swoim profilem, aktualizować dane oraz zmienić ustawienia bezpieczeństwa.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Panel statystyk</h3>
+                <p>Śledź swoją aktywność i analizuj historię logowań dla zwiększenia bezpieczeństwa.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Safe Auth System. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        // You can add JavaScript functionality here if needed
+        // For example, to display the current date or user session duration
+    </script>
+</body>
+</html>

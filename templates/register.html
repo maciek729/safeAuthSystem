@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejestracja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        :root {
+            --primary-color: #4361ee;
+            --primary-hover: #3a56d4;
+            --secondary-color: #2ec4b6;
+            --secondary-hover: #25a99d;
+            --text-color: #333;
+            --text-light: #6c757d;
+            --border-color: #e0e0e0;
+            --bg-color: #f5f7fa;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --input-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s ease;
+            --error-color: #d32f2f;
+            --error-bg: #ffebee;
+            --success-color: #388e3c;
+            --success-bg: #e8f5e9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e0e8ff 0%, #f5f7fa 100%);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 900px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            height: auto;
+            max-height: 98vh;
+            overflow: auto;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: row;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .form-left, .form-right {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        label::before {
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        input, select {
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: var(--transition);
+            box-shadow: var(--input-shadow);
+            background-color: #fafbfd;
+            width: 100%; /* Add or ensure this is present */
+            max-width: 500px; /* Optional: limits the width if the parent is wider */
+}
+
+        input:hover, select:hover {
+            border-color: #c0c0c0;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+            background-color: white;
+        }
+
+        .btn {
+            padding: 10px 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3a56d4 0%, #324abd 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(67, 97, 238, 0.25);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #2ec4b6 0%, #25a99d 100%);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #25a99d 0%, #1d8880 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(46, 196, 182, 0.25);
+        }
+
+        .btn-neutral {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            color: white;
+        }
+
+        .btn-neutral:hover {
+            background: linear-gradient(135deg, #5a6268 0%, #4e555b 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(108, 117, 125, 0.25);
+        }
+
+        .camera-container {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 2px solid var(--border-color);
+            background: #1a1a1a;
+            position: relative;
+        }
+
+        video, canvas, #imagePreview {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            max-height: 240px;
+            object-fit: cover;
+            background: #1a1a1a;
+            display: block;
+        }
+
+        #imagePreview {
+            border-radius: 8px;
+            box-shadow: var(--input-shadow);
+            border: 1px solid var(--success-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 4px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .error-message:before {
+            content: "⚠️";
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .error-list {
+            background-color: var(--error-bg);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 24px;
+            color: var(--error-color);
+            font-size: 14px;
+            border-left: 4px solid var(--error-color);
+        }
+
+        .error-list ul {
+            margin-left: 20px;
+        }
+
+        .quality-controls {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .quality-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        select#imageQuality {
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            width: auto;
+        }
+
+        .camera-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 6px 10px;
+            border-radius: 50px;
+            font-size: 12px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .camera-status:before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .form-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-color);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        @media (max-width: 850px) {
+            .registration-form {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .form-left, .form-right {
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .container {
+                padding: 20px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px;
+                border-radius: 12px;
+                max-height: 100vh;
+            }
+            
+            .form-footer {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .page-title {
+                font-size: 20px;
+                margin-bottom: 16px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="page-title">Rejestracja</h1>
+        
+        <form method="POST" action="/register" class="registration-form">
+            <div class="form-left">
+                <h3 class="form-title">Dane logowania</h3>
+                
+                <div class="form-group">
+                    <label for="username">Nazwa użytkownika</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="username" name="username" required autocomplete="username" placeholder="Wprowadź nazwę użytkownika">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" required autocomplete="new-password" placeholder="Wprowadź bezpieczne hasło">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password2">Powtórz hasło</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password2" name="password2" required autocomplete="new-password" placeholder="Powtórz hasło">
+                    </div>
+                    <div id="passwordError" class="error-message"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Zarejestruj konto</button>
+            </div>
+
+            <div class="form-right">
+                <h3 class="form-title">Zdjęcie profilowe</h3>
+                
+                <div class="camera-container">
+                    <video id="video" autoplay></video>
+                    <div class="camera-status">Kamera aktywna</div>
+                </div>
+                
+                <canvas id="canvas" style="display:none;"></canvas>
+                <button type="button" id="capture" class="btn btn-secondary">Zrób zdjęcie</button>
+                <input type="hidden" name="faceImage" id="faceImage">
+                <img id="imagePreview" style="display:none;">
+                
+                <div class="quality-controls">
+                    <span class="quality-label">Jakość zdjęcia:</span>
+                    <select id="imageQuality">
+                        <option value="0.6">Średnia (zalecana)</option>
+                        <option value="0.4">Niska</option>
+                        <option value="0.8">Wysoka</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="error-list">
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="form-footer">
+            <a href="/login" class="btn btn-neutral">Wróć do logowania</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const password = document.getElementById("password");
+            const password2 = document.getElementById("password2");
+            const passwordError = document.getElementById("passwordError");
+
+            form.addEventListener("submit", function (event) {
+                let valid = true;
+
+                if (password.value !== password2.value) {
+                    passwordError.textContent = "Hasła nie są takie same!";
+                    valid = false;
+                } else {
+                    passwordError.textContent = "";
+                }
+
+                if (!faceImage.value) {
+                    alert("Zrób zdjęcie przed rejestracją!");
+                    valid = false;
+                }
+
+                if (!valid) {
+                    event.preventDefault();
+                }
+            });
+
+            password2.addEventListener("input", function () {
+                if (password.value !== password2.value) {
+                    passwordError.textContent = "Hasła nie są takie same!";
+                } else {
+                    passwordError.textContent = "";
+                }
+            });
+        });
+
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const faceImage = document.getElementById('faceImage');
+        const imagePreview = document.getElementById('imagePreview');
+        const cameraContainer = document.querySelector('.camera-container');
+        const qualitySelector = document.getElementById('imageQuality');
+        const cameraStatus = document.querySelector('.camera-status');
+
+        // Set a lower resolution for the video stream
+        const constraints = {
+            video: {
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            }
+        };
+
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                console.error("Camera error: ", err);
+                cameraContainer.innerHTML = '<div style="aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; background: #1a1a1a; color: white; padding: 20px; text-align: center;">Kamera niedostępna.<br>Sprawdź uprawnienia przeglądarki.</div>';
+                if (cameraStatus) {
+                    cameraStatus.style.display = 'none';
+                }
+            });
+
+        document.getElementById('capture').addEventListener('click', () => {
+            // Get selected quality
+            const quality = parseFloat(qualitySelector.value);
+            
+            // Setup canvas with lower resolution
+            const context = canvas.getContext('2d');
+            
+            // Use a fixed lower resolution
+            const MAX_WIDTH = 640;
+            const MAX_HEIGHT = 480;
+            
+            // Calculate aspect ratio
+            const videoAspectRatio = video.videoWidth / video.videoHeight;
+            
+            // Set dimensions while maintaining aspect ratio
+            let width = Math.min(MAX_WIDTH, video.videoWidth);
+            let height = width / videoAspectRatio;
+            
+            // If height is still too large, adjust both dimensions
+            if (height > MAX_HEIGHT) {
+                height = MAX_HEIGHT;
+                width = height * videoAspectRatio;
+            }
+            
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Draw image and compress
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Get compressed image data with selected quality
+            const dataUrl = canvas.toDataURL('image/jpeg', quality);
+            
+            faceImage.value = dataUrl;
+            imagePreview.src = dataUrl;
+            imagePreview.style.display = 'block';
+            video.style.display = 'none';
+            
+            // Don't hide container, just update status
+            if (cameraStatus) {
+                cameraStatus.style.display = 'none';
+            }
+            
+            // Change the capture button to retake button
+            const captureBtn = document.getElementById('capture');
+            captureBtn.textContent = 'Zrób nowe zdjęcie';
+            captureBtn.classList.remove('btn-secondary');
+            captureBtn.classList.add('btn-neutral');
+            
+            captureBtn.addEventListener('click', function retakePhoto() {
+                // Switch back to video
+                imagePreview.style.display = 'none';
+                video.style.display = 'block';
+                if (cameraStatus) {
+                    cameraStatus.style.display = 'flex';
+                }
+                
+                // Reset the button
+                captureBtn.textContent = 'Zrób zdjęcie';
+                captureBtn.classList.remove('btn-neutral');
+                captureBtn.classList.add('btn-secondary');
+                
+                // Remove this specific event listener
+                captureBtn.removeEventListener('click', retakePhoto);
+            }, { once: true }); // Use once:true to ensure this only runs once
+            
+            console.log(`Image size: ~${Math.round(dataUrl.length / 1024)} KB`);
+        });
+    </script>
+</body>
+
+</html>
